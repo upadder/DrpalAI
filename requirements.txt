@@ -9,3 +9,6 @@ azure-identity
 langchain-openai==0.0.5
 langchain-community==0.0.17
 unstructured
+flask
+transformers
+sentence-transformers
