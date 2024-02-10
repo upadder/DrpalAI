@@ -1,0 +1,11 @@
+azure-storage-blob==12.19.0
+langchain
+openai
+python-dotenv
+streamlit
+streamlit_chat
+azure-search-documents==11.4.0b8
+azure-identity
+langchain-openai==0.0.5
+langchain-community==0.0.17
+unstructured
