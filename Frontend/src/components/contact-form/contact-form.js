@@ -58,7 +58,30 @@ function ContactForm() {
 
       if (!response.ok) throw new Error('Network response was not ok');
       const responseData = await response.json();
-      console.log('Response from backend:', responseData);
+      console.log('Response from backend:', responseData.summary);
+      // Handle success here
+      await getDates(formData);
+      //props.setShowForm(false);
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error here
+    }
+  };
+
+  const getDates = async (formData) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/fetch_visit_dates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+      const responseData = await response.json();
+      console.log('Response from backend:', responseData.visit_dates);
+      
       // Handle success here
     } catch (error) {
       console.error('Error:', error);

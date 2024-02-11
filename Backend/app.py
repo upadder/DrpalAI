@@ -17,25 +17,29 @@ openai.api_key = OPENAI_API_KEY
 
 # Initialize the memory, model, and retriever
 memory = ConversationBufferWindowMemory(k=4)
-llm = OpenAI()  # Assuming OpenAI class supports using conversation context
+llm = OpenAI(max_tokens=1024) 
+llm2 = OpenAI(max_tokens=1024) 
+ # Assuming OpenAI class supports using conversation context
 # retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
 chat_retriever = AzureCognitiveSearchRetriever(
     service_name=os.getenv('AZURE_COGNITIVE_SEARCH_SERVICE_NAME'),
     index_name=os.getenv('AZURE_CHAT_COGNITIVE_SEARCH_INDEX_NAME'),
     api_key=os.getenv('AZURE_COGNITIVE_SEARCH_API_KEY'),
     content_key="content",  # Replace with the field you want to retrieve from your index
-    top_k=5
+    top_k=6
 )
 patient_info_retriever = AzureCognitiveSearchRetriever(
     service_name=os.getenv('AZURE_COGNITIVE_SEARCH_SERVICE_NAME'),
     index_name=os.getenv('AZURE_COGNITIVE_SEARCH_INDEX_NAME'),
     api_key=os.getenv('AZURE_COGNITIVE_SEARCH_API_KEY'),
     content_key="content",  # Replace with the field you want to retrieve from your index
-    top_k=5
+    top_k=6
 )
 qa_chain = RetrievalQA.from_llm(llm=llm, retriever=chat_retriever,verbose=True,
     memory=memory)
-qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=patient_info_retriever)
+qa_chain_patient=RetrievalQA.from_llm(llm=llm2, retriever=patient_info_retriever)
+
+
 
 chatbot_context = """I am an assistive conversational chatbot here to help Doctor's Treatment Recommendation
 
@@ -133,11 +137,11 @@ def fetch_visit_dates():
     insuranceNumber = patient_data.get('insuranceNumber') or patient_data.get('ssn')
 
     # Craft a query that specifically asks for visit dates associated with the insurance number
-    query_for_visit_dates = f"Retrieve all visit dates in orderly manner for the patient with insurance number: {insuranceNumber}. and return only comma separated dates in ascending order"
-
+    query_for_visit_dates = f"Retrieve records for the patient with insurance number: {insuranceNumber} in increasing visit dates and return in json format {{date:,title:,description: }} only"
+    print(query_for_visit_dates)
     # Invoke the retrieval chain to execute the query
     visit_dates_result = qa_chain_patient.invoke({"query": query_for_visit_dates})
-    
+    print(visit_dates_result)
     # Extract and process the visit dates from the response
     visit_dates = visit_dates_result.get("result", "No visit dates found or unable to retrieve visit dates.")
     
