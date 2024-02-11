@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from langchain_community.retrievers import AzureCognitiveSearchRetriever
 from langchain.chains import RetrievalQA
 from langchain_community.llms import OpenAI
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferWindowMemory 
 import openai
 from flask_cors import CORS  # Import CORS module
 
@@ -16,7 +16,7 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 # Initialize the memory, model, and retriever
-memory = ConversationBufferMemory(return_messages=True)
+memory = ConversationBufferWindowMemory(k=4)
 llm = OpenAI()  # Assuming OpenAI class supports using conversation context
 # retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
 chat_retriever = AzureCognitiveSearchRetriever(
@@ -35,9 +35,37 @@ patient_info_retriever = AzureCognitiveSearchRetriever(
 )
 qa_chain = RetrievalQA.from_llm(llm=llm, retriever=chat_retriever,verbose=True,
     memory=memory)
-qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=patient_info_retriever)
+qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=patient_info_retriever,verbose=True,
+    memory=memory)
 
-chatbot_context = "I am an assistive conversational chatbot here to help doctors by giving suggestions & find answers from the database. If I don't know the answer, I will ask more questions that help me find related answers."
+chatbot_context = """I am an assistive conversational chatbot here to help Doctor's Treatment Recommendation
+
+A patient's data points have been provided for consideration:
+
+- *Age*
+- *Gender*
+- *Histology*
+- *Chronic Disease*
+- *Medications*
+- *Tumour Stage Numerical*
+
+Given these data points, the doctor seeks the best method of treatment, including the *Surgery Type. The recommendation should be based not only on the **Survival Rate* associated with each treatment method but also on the similarity in values of the provided data points.
+
+For a comprehensive recommendation, the model should identify cases with similar values for the provided data points and select the treatment option with the highest associated survival rate among those cases.
+
+If necessary, the model can request additional data such as:
+
+- *Protein1*
+- *Protein2*
+- *Protein3*
+- *Protein4*
+- *ER Status*
+- *PR Status*
+- *HER2 Status*
+
+These additional data points can further refine the treatment recommendation by identifying cases with similar biological profiles and treatment outcomes.
+
+Context for Chatbot: You are tasked with providing treatment recommendations to a doctor based on a patient's data. The recommendation should prioritize treatment methods with higher survival rates among cases with similar values for the provided data points."""
 
 
 
@@ -77,7 +105,7 @@ def fetch_patient_info():
     name=patient_data.get('name')
     # Assuming the unique_identifier can be used directly to query your vector database
     # Here, you might need to adjust the query format based on how your data is structured
-    query_for_patient_info = f"Find all patient record for identifier: {insuranceNumber} & {name}"
+    query_for_patient_info = f"Find all patient record for identifier: {insuranceNumber}"
     
     # Use the qa_chain or a similar retrieval mechanism to fetch patient information
     
