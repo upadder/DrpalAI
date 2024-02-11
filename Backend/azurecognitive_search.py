@@ -85,7 +85,7 @@ loader = AzureBlobStorageContainerLoader(
 documents = loader.load()
 
 # Split documents into chunks
-text_splitter = CharacterTextSplitter(chunk_size=150, chunk_overlap=20)
+text_splitter = CharacterTextSplitter(chunk_size=454, chunk_overlap=50)
 docs = text_splitter.split_documents(documents)
 
 # Add documents to the vector store
