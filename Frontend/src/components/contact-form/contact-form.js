@@ -92,8 +92,9 @@ function ContactForm(props) {
   };
 
 
-  return (
-    <div style={{ backgroundColor: '#1E1E1E', color: '#D4DCE2', padding: '20px', borderRadius: '8px' }}>
+  return (<>
+    <p style={{backgroundColor: "#1E1E1E",minHeight:'155px'}}></p>
+    <div style={{ backgroundColor: '#1E1E1E', color: '#D4DCE2', padding: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
       <Typography variant="h4" gutterBottom style={{ color: '#D4DCE2', textAlign: 'center', fontFamily: 'Satoshi, sans-serif' }}>
         Patient History Tracker
       </Typography>
@@ -239,6 +240,7 @@ function ContactForm(props) {
           error={!!formErrors.gender}
           helperText={formErrors.gender || ' '}
           InputLabelProps={{ style: { color: '#D4DCE2' } }}
+      
   // Using the sx prop to apply styles
   sx={{
     '& .MuiOutlinedInput-root': {
@@ -347,6 +349,8 @@ function ContactForm(props) {
         </Button>
       </form>
     </div>
+    <p style={{backgroundColor: "#1E1E1E",minHeight:'155px'}}></p>
+    </>
   );
 }
 
