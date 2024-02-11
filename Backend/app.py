@@ -105,7 +105,7 @@ def fetch_patient_info():
     name=patient_data.get('name')
     # Assuming the unique_identifier can be used directly to query your vector database
     # Here, you might need to adjust the query format based on how your data is structured
-    query_for_patient_info = f"Find all patient record for identifier: {insuranceNumber}"
+    query_for_patient_info = f"retrieve and provide the patient records corresponding to this {insurance number}"
     
     # Use the qa_chain or a similar retrieval mechanism to fetch patient information
     
