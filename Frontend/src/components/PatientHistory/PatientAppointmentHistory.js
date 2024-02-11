@@ -55,7 +55,7 @@ function PatientAppointmentHistory(props) {
 
   return (
     <>
-    <Box sx={{ backgroundColor: 'black', color: 'white', minHeight: '100vh' }}>
+    <Box sx={{ backgroundColor: '#1E1E1E', color: '#D4DCE', minHeight: '100vh' }}>
       <Grid container justifyContent="center" alignItems="center" sx={{ my: 4 }}>
         <Grid item>
           <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="App Logo" style={{ maxWidth: '100%', maxHeight: '200px' }} />

@@ -80,7 +80,7 @@ function ContactForm(props) {
   return (
     <div className="max-w-md mx-auto my-10">
       <Typography variant="h4" gutterBottom className="text-center mb-4">
-        Client Information Form
+        Patient Information Form
       </Typography>
       <form noValidate autoComplete="off" onSubmit={handleSubmit} className="space-y-4">
         <TextField
