@@ -60,7 +60,6 @@ function ContactForm(props) {
       const responseData = await response.json();
       console.log('Response from backend:', responseData.summary);
       // Handle success here
-      await getDates(formData);
       //props.setShowForm(false);
       props.setShowForm(false);
     } catch (error) {
@@ -69,35 +68,7 @@ function ContactForm(props) {
     }
   };
 
-  const getDates = async (formData) => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/fetch_visit_dates', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) throw new Error('Network response was not ok');
-      const responseData = await response.json();
-      console.log('Response from backend:', responseData.visit_dates);
-      // console.log()
-      // Handle success here
-
-      // data Cleaning 
-
-      let visitDatesString = response.visit_dates.trim();
-      let visitDatesArray = JSON.parse("[" + visitDatesString + "]");
-
-      props.setAppointmentsData(visitDatesArray)
-
-      // End of Cleaning
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle error here
-    }
-  };
+  
 
   return (
     <div className="max-w-md mx-auto my-10">
