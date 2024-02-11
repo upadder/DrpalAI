@@ -9,9 +9,13 @@ import Modal from './Modal';
 import logo from '../../assets/logo.png';
 import ChatView from './ChatView';
 // import PatientSummary from "../PatientSummary/PatientSummary";
+import { usePromiseTracker } from "react-promise-tracker";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import PatientAppointmentHistory from "../PatientHistory/PatientAppointmentHistory";
 const Home = (props) => {
+    const { promiseInProgress } = usePromiseTracker();
     const { loggedIn, email } = props
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState(false);
@@ -23,6 +27,10 @@ const Home = (props) => {
     }
 
     return <div className="Home">
+        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={promiseInProgress}>
+                <CircularProgress color="inherit" size={60}/>
+            </Backdrop>
             <div className="split-screen">
                 <div className="left">
                 <div className="content">

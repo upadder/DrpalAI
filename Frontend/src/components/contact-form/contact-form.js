@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, MenuItem, Button, Typography } from '@mui/material';
+import { trackPromise } from 'react-promise-tracker';
 
 const insuranceProviders = ['Provider A', 'Provider B', 'Provider C'];
 const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
@@ -48,20 +49,25 @@ function ContactForm(props) {
 
   const sendMessageToBackend = async (formData) => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/fetch_patient_info', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) throw new Error('Network response was not ok');
-      const responseData = await response.json();
-      console.log('Response from backend:', responseData.summary);
-      // Handle success here
-      //props.setShowForm(false);
-      props.setShowForm(false);
+      // Wrap the fetch operation with trackPromise
+      await trackPromise(
+        fetch('http://127.0.0.1:5000/fetch_patient_info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.json();
+        })
+        .then(responseData => {
+          console.log('Response from backend:', responseData.summary);
+          // Handle success here
+          props.setShowForm(false); // Assuming this is a part of your component's props
+        })
+      );
     } catch (error) {
       console.error('Error:', error);
       // Handle error here
