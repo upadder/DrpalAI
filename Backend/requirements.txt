@@ -12,3 +12,4 @@ unstructured
 flask
 transformers
 sentence-transformers
+flask_cors
