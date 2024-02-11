@@ -108,7 +108,7 @@ def fetch_patient_info():
     name=patient_data.get('name')
     # Assuming the unique_identifier can be used directly to query your vector database
     # Here, you might need to adjust the query format based on how your data is structured
-    query_for_patient_info = f"Deep search and provide latest 5 patient records corresponding to the insurance number: {insuranceNumber}. If no records are found for this insurance number, indicate that the patient is not present in the database."
+    query_for_patient_info = f"Search and provide latest 5 patient records corresponding to the insurance number: {insuranceNumber}. If no records are found for this insurance number, indicate that the patient is not present in the database."
     
     # Use the qa_chain or a similar retrieval mechanism to fetch patient information
     
@@ -131,22 +131,22 @@ def fetch_patient_info():
     print(summary)
     return jsonify({'summary': summary})
 
-@app.route('/fetch_visit_dates', methods=['POST'])
-def fetch_visit_dates():
-    patient_data = request.json
-    insuranceNumber = patient_data.get('insuranceNumber') or patient_data.get('ssn')
+# @app.route('/fetch_visit_dates', methods=['POST'])
+# def fetch_visit_dates():
+#     patient_data = request.json
+#     insuranceNumber = patient_data.get('insuranceNumber') or patient_data.get('ssn')
 
-    # Craft a query that specifically asks for visit dates associated with the insurance number
-    query_for_visit_dates = f"Retrieve records for the patient with insurance number: {insuranceNumber} in increasing visit dates and return in json format {{date:,title:,description: }} only"
-    print(query_for_visit_dates)
-    # Invoke the retrieval chain to execute the query
-    visit_dates_result = qa_chain_patient.invoke({"query": query_for_visit_dates})
-    print(visit_dates_result)
-    # Extract and process the visit dates from the response
-    visit_dates = visit_dates_result.get("result", "No visit dates found or unable to retrieve visit dates.")
+#     # Craft a query that specifically asks for visit dates associated with the insurance number
+#     query_for_visit_dates = f"Retrieve 5 records for the patient with insurance number: {insuranceNumber} in increasing visit dates and return date, title and medication in this format {{date:,title:,medication: }} only"
+#     print(query_for_visit_dates)
+#     # Invoke the retrieval chain to execute the query
+#     visit_dates_result = qa_chain_patient.invoke({"query": query_for_visit_dates})
+#     print(visit_dates_result)
+#     # Extract and process the visit dates from the response
+#     visit_dates = visit_dates_result.get("result", "No visit dates found or unable to retrieve visit dates.")
     
-    # Return the visit dates as part of the response
-    return jsonify({'visit_dates': visit_dates})
+#     # Return the visit dates as part of the response
+#     return jsonify({'visit_dates': visit_dates})
 
 
 if __name__ == '__main__':
