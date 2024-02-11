@@ -15,8 +15,8 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
-            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
+            <Route path="/Home" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>} />
+            <Route path="/" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
           </Routes>
         </BrowserRouter>
       </div>

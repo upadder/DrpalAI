@@ -89,7 +89,7 @@ export default function SignInSide() {
 
   const handleLoginSuccess = (credentialResponse) => {
     console.log(credentialResponse);
-    navigate('/'); // Redirect to home page
+    navigate('/home'); // Redirect to home page
   };
 
   const handleLoginFailure = () => {
