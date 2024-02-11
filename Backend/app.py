@@ -16,9 +16,9 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 # Initialize the memory, model, and retriever
-memory = ConversationBufferWindowMemory(k=4)
-llm = OpenAI(max_tokens=1024) 
-llm2 = OpenAI(max_tokens=1024) 
+memory = ConversationBufferWindowMemory(k=1)
+llm = OpenAI(max_tokens=2000)
+llm2 = OpenAI(max_tokens=2000 ) 
  # Assuming OpenAI class supports using conversation context
 # retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
 chat_retriever = AzureCognitiveSearchRetriever(
