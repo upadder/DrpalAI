@@ -95,7 +95,7 @@ function ContactForm(props) {
   return (<>
     <p style={{backgroundColor: "#1E1E1E",minHeight:'155px'}}></p>
     <div style={{ backgroundColor: '#1E1E1E', color: '#D4DCE2', padding: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
-      <Typography variant="h4" gutterBottom style={{ color: '#D4DCE2', textAlign: 'center', fontFamily: 'Satoshi, sans-serif' }}>
+      <Typography variant="h4" gutterBottom style={{ color: '#D4DCE2', textAlign: 'center', fontFamily: 'Satoshi-Bold, sans-serif' }}>
         Patient History Tracker
       </Typography>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -171,23 +171,23 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.insuranceProvider}
           helperText={formErrors.insuranceProvider || ' '}
-          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+          InputLabelProps={{ style: { color: '#FFF' } }}
   // Using the sx prop to apply styles
   sx={{
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#D4DCE2', // default
+    '&.MuiInputBase-root.MuiOutlinedInput-root': {
+      // Custom styles here
+      color: '#fff',
+      '&:hover': {
+        color: '#fff',
       },
-      '&:hover fieldset': {
-        borderColor: '#D4DCE2', // hover
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#D4DCE2', // focused
+      '&.Mui-focused': {
+        color: '#fff',
       },
     },
+    
     // Apply color directly to the input
     input: {
-      color: '#D4DCE2',
+      color: '#fff',
     }
   }}
         >
