@@ -41,7 +41,7 @@ const Home = (props) => {
                 <div className="content">
                     {/* <FormComponent />  */}
                     
-                    {showForm ? <ContactForm setAppointmentsData = {setAppointmentsData}/> : <PatientAppointmentHistory appointmentData = {appointmentData}/> }
+                    {showForm ? <ContactForm setAppointmentsData = {setAppointmentsData} setShowForm = {setShowForm}/> : <PatientAppointmentHistory appointmentData = {appointmentData}/> }
                     
                 </div>
                 </div>

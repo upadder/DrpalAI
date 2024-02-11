@@ -62,6 +62,7 @@ function ContactForm(props) {
       // Handle success here
       await getDates(formData);
       //props.setShowForm(false);
+      props.setShowForm(false);
     } catch (error) {
       console.error('Error:', error);
       // Handle error here
