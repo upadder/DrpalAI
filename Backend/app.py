@@ -6,7 +6,10 @@ from langchain.chains import RetrievalQA
 from langchain_community.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 import openai
+from flask_cors import CORS  # Import CORS module
 
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 # Load environment variables and setup API key
 load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -15,14 +18,33 @@ openai.api_key = OPENAI_API_KEY
 # Initialize the memory, model, and retriever
 memory = ConversationBufferMemory(return_messages=True)
 llm = OpenAI()  # Assuming OpenAI class supports using conversation context
-retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
-qa_chain = RetrievalQA.from_llm(llm=llm, retriever=retriever,verbose=True,
+# retriever = AzureCognitiveSearchRetriever(content_key="content", top_k=5)
+chat_retriever = AzureCognitiveSearchRetriever(
+    service_name=os.getenv('AZURE_COGNITIVE_SEARCH_SERVICE_NAME'),
+    index_name=os.getenv('AZURE_CHAT_COGNITIVE_SEARCH_INDEX_NAME'),
+    api_key=os.getenv('AZURE_COGNITIVE_SEARCH_API_KEY'),
+    content_key="content",  # Replace with the field you want to retrieve from your index
+    top_k=5
+)
+patient_info_retriever = AzureCognitiveSearchRetriever(
+    service_name=os.getenv('AZURE_COGNITIVE_SEARCH_SERVICE_NAME'),
+    index_name=os.getenv('AZURE_COGNITIVE_SEARCH_INDEX_NAME'),
+    api_key=os.getenv('AZURE_COGNITIVE_SEARCH_API_KEY'),
+    content_key="content",  # Replace with the field you want to retrieve from your index
+    top_k=5
+)
+qa_chain = RetrievalQA.from_llm(llm=llm, retriever=chat_retriever,verbose=True,
     memory=memory)
-qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=retriever)
-app = Flask(__name__)
-chatbot_context = "I am an assistive conversational chatbot here to help doctors find answers from the database. If I don't know the answer, I will ask more questions that help me find related answers."
+qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=patient_info_retriever)
+
+chatbot_context = "I am an assistive conversational chatbot here to help doctors by giving suggestions & find answers from the database. If I don't know the answer, I will ask more questions that help me find related answers."
+
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
+    print('Hi')
+    print(request.json)
     user_message = request.json.get('message')
     print(f"Received message: {user_message}")  # Log received message
 

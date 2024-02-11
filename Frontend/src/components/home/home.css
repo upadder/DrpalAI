@@ -1,0 +1,36 @@
+.Home {
+    text-align: center;
+    height: 100vh; /* Full height of the viewport */
+  }
+  
+  .split-screen {
+    display: flex; /* Enables Flexbox */
+    height: 100%;
+  }
+  
+  .left, .right {
+    flex: 1; /* Each side takes up equal space */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .left {
+    background-color: #7CA982; /* Example color */
+  }
+  
+  .right {
+    background-color: #fff; /* Example color */
+  }
+  
+  .content {
+    text-align: center;
+    width: 100%;
+  }
+  .left, .right {
+    width: 50%; /* Explicitly set each side to take up half of the parent's width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
