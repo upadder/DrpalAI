@@ -28,7 +28,52 @@ function Copyright(props) {
   );
 }
 
-const defaultTheme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1D8FE1', // Blue color from the Design System
+    },
+    secondary: {
+      main: '#252422', // Gray color from the Design System
+    },
+    error: {
+      main: '#f44336',
+    },
+    background: {
+      default: '#1E1E1E', // Black color from the Design System
+    },
+    text: {
+      primary: '#FFFFFF', // White 2 color from the Design System
+      secondary: '#D4DCE2', // White 1 color from the Design System
+    },
+  },
+  typography: {
+    fontFamily: 'Satoshi, Arial', // Typeface from the Design System
+  },
+  components: {
+    // Override styles for TextField here to match the Design System
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& label.Mui-focused': {
+            color: '#D4DCE2', // White 1 color for focused label
+          },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#1D8FE1', // Blue color for the border
+            },
+            '&:hover fieldset': {
+              borderColor: '#1D8FE1', // Blue color for the border on hover
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#1D8FE1', // Blue color for the border when focused
+            },
+          },
+        },
+      },
+    },
+  },
+});
 
 export default function SignInSide() {
   const navigate = useNavigate();
@@ -70,7 +115,7 @@ export default function SignInSide() {
   // };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh', bgcolor: 'black' }}>
         <CssBaseline /> 
         <Grid
@@ -93,7 +138,8 @@ export default function SignInSide() {
               color: 'white',
             }}
           >
-            Welcome to Our Service
+            Enhance Diagnosis, Empower Insights  <br /> 
+            Whether you seek to understand complex cases  <br /> or optimize patient care,  <br />Doctor Pal leverages AI to streamline medical diagnosis.
           </Typography>
         <Box
             sx={{
@@ -131,9 +177,10 @@ export default function SignInSide() {
               color: '#fff', // Set the default text color to white for all child components
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}> */}
+              {/* <LockOutlinedIcon /> */}
+              <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="App Logo" style={{ maxWidth: '100%', maxHeight: '200px' }} />
+            {/* </Avatar> */}
             <Typography component="h1" variant="h5" color="white">
               Sign in
             </Typography>

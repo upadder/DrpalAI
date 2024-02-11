@@ -55,7 +55,7 @@ function PatientAppointmentHistory(props) {
 
   return (
     <>
-    <Box sx={{ backgroundColor: '#1E1E1E', color: '#D4DCE', minHeight: '100vh' }}>
+    <Box sx={{ backgroundColor: '#252422', color: '#D4DCE', minHeight: '100vh' }}>
       <Grid container justifyContent="center" alignItems="center" sx={{ my: 4 }}>
         <Grid item>
           <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="App Logo" style={{ maxWidth: '100%', maxHeight: '200px' }} />
@@ -66,7 +66,7 @@ function PatientAppointmentHistory(props) {
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           {/* Summary Data Display */}
-          <Typography component="div" variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
+          <Typography component="div" variant="body1" sx={{ whiteSpace: 'pre-wrap',backgroundColor: '#1E1E1E' }}>
             {summaryData}
           </Typography>
         </Paper>
