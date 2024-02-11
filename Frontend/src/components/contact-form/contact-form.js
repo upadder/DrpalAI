@@ -4,7 +4,7 @@ import { TextField, MenuItem, Button, Typography } from '@mui/material';
 const insuranceProviders = ['Provider A', 'Provider B', 'Provider C'];
 const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
-function ContactForm() {
+function ContactForm(props) {
   const [formValues, setFormValues] = useState({
     name: '',
     age: '',
@@ -81,8 +81,17 @@ function ContactForm() {
       if (!response.ok) throw new Error('Network response was not ok');
       const responseData = await response.json();
       console.log('Response from backend:', responseData.visit_dates);
-      
+      // console.log()
       // Handle success here
+
+      // data Cleaning 
+
+      let visitDatesString = response.visit_dates.trim();
+      let visitDatesArray = JSON.parse("[" + visitDatesString + "]");
+
+      props.setAppointmentsData(visitDatesArray)
+
+      // End of Cleaning
     } catch (error) {
       console.error('Error:', error);
       // Handle error here

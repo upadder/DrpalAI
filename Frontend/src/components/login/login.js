@@ -42,30 +42,32 @@ export default function SignInSide() {
     });
   };
 
-  // const handleLoginSuccess = (credentialResponse) => {
-  //   console.log(credentialResponse);
-  //   navigate('/'); // Redirect to home page
-  // };
-
-  // const handleLoginFailure = () => {
-  //   console.log('Login Failed');
-  // };
-
-  const handleGoogleLogin = () => {
-    if (window.google) {
-      window.google.accounts.id.initialize({
-        client_id: '970850734399-gb219lo9k7e42f8oqmnnbggfm5du6qjk.apps.googleusercontent.com', // Replace with your client ID
-        callback: handleCredentialResponse,
-      });
-  
-      window.google.accounts.id.prompt(); // This will display the Google One Tap or popup
-    }
+  const handleLoginSuccess = (credentialResponse) => {
+    console.log(credentialResponse);
+    navigate('/'); // Redirect to home page
   };
-  
-  const handleCredentialResponse = (response) => {
-    console.log("Encoded JWT ID token: " + response.credential);
-    navigate('/'); // Redirect or handle the login success
+
+  const handleLoginFailure = () => {
+    console.log('Login Failed');
   };
+
+  // const handleGoogleLogin = () => {
+  //   console.log("Hi Handle Google");
+  //   console.log("Hi Handle Google 2 ",window);
+  //   if (window.google) {
+  //     window.google.accounts.id.initialize({
+  //       client_id: '1053407861019-7luin9tbd3it37iavs7ldq2jc5cqckmp.apps.googleusercontent.com', // Replace with your client ID
+  //       callback: handleCredentialResponse,
+  //     });
+  //     console.log("Hi Handle Google 3 ");
+  //     window.google.accounts.id.prompt(); // This will display the Google One Tap or popup
+  //   }
+  // };
+  
+  // const handleCredentialResponse = (response) => {
+  //   console.log("Encoded JWT ID token: " + response.credential);
+  //   navigate('/'); // Redirect or handle the login success
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -228,12 +230,18 @@ export default function SignInSide() {
                 Sign In
               </Button>
               
-              {/* <GoogleLogin
+              <GoogleLogin
                 onSuccess={handleLoginSuccess}
                 onError={handleLoginFailure}
+                style={{
+                  width: '100%', // Full width to match the sign-in button
+                  marginTop: '16px', // Match the margin-top of the sign-in button for consistent spacing
+                  
+                  // Apply additional styles here to match the design of your sign-in button
+                }}
                 // Customize GoogleLogin button if possible or ensure it contrasts well against the background
-              /> */}
-              <Button
+              />
+              {/* <Button
                 fullWidth
                 variant="outlined"
                 sx={{
@@ -246,7 +254,7 @@ export default function SignInSide() {
                 onClick={handleGoogleLogin}
               >
                 Sign in with Google
-              </Button>
+              </Button> */}
               <Grid container justifyContent="space-between" sx={{ mt: 2 }}>
                 <Grid item>
                   <Link href="#" variant="body2" sx={{ color: 'white' }}>
