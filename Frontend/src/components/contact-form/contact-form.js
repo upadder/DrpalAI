@@ -75,14 +75,29 @@ function ContactForm(props) {
     }
   };
 
-  
+  const textFieldStyle = {
+    input: {
+      color: '#D4DCE2',
+      borderColor: 'grey',
+      '&:before': {
+        borderColor: '#D4DCE2',
+      },
+      '&:hover:not(.Mui-disabled):before': {
+        borderColor: '#D4DCE2',
+      },
+    },
+    notchedOutline: {
+      borderColor: '#D4DCE2', // Default border color
+    },
+  };
+
 
   return (
-    <div className="max-w-md mx-auto my-10">
-      <Typography variant="h4" gutterBottom className="text-center mb-4">
-        Patient Information Form
+    <div style={{ backgroundColor: '#1E1E1E', color: '#D4DCE2', padding: '20px', borderRadius: '8px' }}>
+      <Typography variant="h4" gutterBottom style={{ color: '#D4DCE2', textAlign: 'center', fontFamily: 'Satoshi, sans-serif' }}>
+        Patient History Tracker
       </Typography>
-      <form noValidate autoComplete="off" onSubmit={handleSubmit} className="space-y-4">
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           fullWidth
           label="Name"
@@ -93,6 +108,25 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.name}
           helperText={formErrors.name || ' '}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+  // Using the sx prop to apply styles
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+  }}
         />
         <TextField
           fullWidth
@@ -105,6 +139,25 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.age}
           helperText={formErrors.age || ' '}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+  // Using the sx prop to apply styles
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+  }}
         />
         <TextField
           fullWidth
@@ -117,6 +170,25 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.insuranceProvider}
           helperText={formErrors.insuranceProvider || ' '}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+  // Using the sx prop to apply styles
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+  }}
         >
           {insuranceProviders.map((option) => (
             <MenuItem key={option} value={option}>
@@ -125,16 +197,36 @@ function ContactForm(props) {
           ))}
         </TextField>
         <TextField
-          fullWidth
-          label="Insurance Number"
-          margin="normal"
-          variant="outlined"
-          name="insuranceNumber"
-          value={formValues.insuranceNumber}
-          onChange={handleChange}
-          error={!!formErrors.insuranceNumber}
-          helperText={formErrors.insuranceNumber || ' '}
-        />
+  fullWidth
+  label="Insurance Number"
+  margin="normal"
+  variant="outlined"
+  name="insuranceNumber"
+  value={formValues.insuranceNumber}
+  onChange={handleChange}
+  error={!!formErrors.insuranceNumber}
+  helperText={formErrors.insuranceNumber || ' '}
+  InputLabelProps={{ style: { color: '#D4DCE2' } }}
+  // Using the sx prop to apply styles 
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+  }}
+/>
+
         <TextField
           fullWidth
           select
@@ -146,6 +238,25 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.gender}
           helperText={formErrors.gender || ' '}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+  // Using the sx prop to apply styles
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+  }}
         >
           <MenuItem value="Female">Female</MenuItem>
           <MenuItem value="Male">Male</MenuItem>
@@ -163,6 +274,30 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.bloodType}
           helperText={formErrors.bloodType || ' '}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+  // Using the sx prop to apply styles
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& input' : {
+        color: '#D4DCE2' 
+      },
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+      
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+    
+  }}
         >
           {bloodTypes.map((type) => (
             <MenuItem key={type} value={type}>
@@ -180,9 +315,34 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.ssn}
           helperText={formErrors.ssn || ' '}
-          inputProps={{ maxLength: 4 }}
+          // InputLabelProps={{ style: { color: '#D4DCE2' } }}
+          // InputProps={{
+          //   maxLength: 4,
+          //   style: { color: '#D4DCE2', borderColor: '#D4DCE2' },
+          //   classes: textFieldStyle,
+          // }}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+          InputProps={{maxLength: 4}}
+  // Using the sx prop to apply styles
+  sx={{
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#D4DCE2', // default
+      },
+      '&:hover fieldset': {
+        borderColor: '#D4DCE2', // hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#D4DCE2', // focused
+      },
+    },
+    // Apply color directly to the input
+    input: {
+      color: '#D4DCE2',
+    }
+  }}
         />
-        <Button variant="contained" color="primary" fullWidth type="submit" className="mt-5">
+        <Button variant="contained" color="primary" fullWidth type="submit" style={{ backgroundColor: '#1D8FE1', color: '#FFFFFF', marginTop: '20px', fontFamily: 'Satoshi, sans-serif'}}>
           Submit
         </Button>
       </form>
