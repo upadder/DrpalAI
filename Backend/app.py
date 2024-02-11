@@ -122,7 +122,7 @@ def fetch_patient_info():
     # # This step is highly dependent on the format of your patient_info_result
     
    
-    prompt = f"Create a concise medical summary in a paragraph for the following patient data from the start of his first visit to doctor give focussed points for diagnosis, allergies, medications and everything else necessary for doctor to treat the patient\n{patient_info}"
+    prompt = f"Create a concise medical summary in a paragraph for the following patient data from the start of his first visit to doctor give focussed points for diagnosis, allergies, medications and everything else necessary for doctor to treat the patient\n{patient_info}, if the above context says It doesn't know or no record found or something similar, convery the same message politely,strictly don't create random summaries"
     
     # # Query the OpenAI model to generate a summary
     summary_result =qa_chain_patient.invoke({"query":prompt}) 
