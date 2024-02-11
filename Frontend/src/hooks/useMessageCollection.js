@@ -9,10 +9,7 @@ const useMessageCollection = () => {
   const initialMsg = {
     id: 1,
     createdAt: Date.now(),
-    text: `
-     
-      Hello ! Welcome to Dr. Pal, I am your Pal here to assist you in providing rich healthcare to our patients.
-    `,
+    text: "Welcome to our Dr Pal! I'm here to help you access patient data and provide medical insights. Just share patient identifiers like insurance numbers, and I'll fetch the records for you!",
     ai: true,
   };
   const [messages, setMessages] = useState([initialMsg]);

@@ -16,7 +16,7 @@ const ChatMessage = (props) => {
   const { id, createdAt, text, ai = false } = props.message;
 
   return (
-    <div key={id} className={`${ai && 'bg-sky-100'} flex-row-reverse message px-10`}>
+    <div key={id} className={`${ai && ''} flex-row-reverse message px-10`}>
       <div className="message__wrapper">
         <ReactMarkdown
           className={'message__markdown text-left'}
