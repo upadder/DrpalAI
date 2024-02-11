@@ -20,7 +20,7 @@ const Home = (props) => {
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState(false);
     const [showForm,setShowForm] = useState(true);
-    const [appointmentData,setAppointmentsData] = useState([]);
+    const [summaryData,setSummaryData] = useState("");
     
     const onButtonClick = () => {
         // You'll update this function later
@@ -49,7 +49,7 @@ const Home = (props) => {
                 <div className="content">
                     {/* <FormComponent />  */}
                     
-                    {showForm ? <ContactForm setAppointmentsData = {setAppointmentsData} setShowForm = {setShowForm}/> : <PatientAppointmentHistory appointmentData = {appointmentData}/> }
+                    {showForm ? <ContactForm setSummaryData = {setSummaryData} setShowForm = {setShowForm}/> : <PatientAppointmentHistory summaryData = {summaryData}/> }
                     
                 </div>
                 </div>

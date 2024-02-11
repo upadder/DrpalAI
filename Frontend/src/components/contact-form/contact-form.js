@@ -65,6 +65,7 @@ function ContactForm(props) {
         .then(responseData => {
           console.log('Response from backend:', responseData.summary);
           // Handle success here
+          props.setSummaryData(responseData.summary);
           props.setShowForm(false); // Assuming this is a part of your component's props
         })
       );
