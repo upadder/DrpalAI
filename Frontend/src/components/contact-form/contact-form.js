@@ -171,25 +171,33 @@ function ContactForm(props) {
           onChange={handleChange}
           error={!!formErrors.insuranceProvider}
           helperText={formErrors.insuranceProvider || ' '}
-          InputLabelProps={{ style: { color: '#FFF' } }}
-  // Using the sx prop to apply styles
-  sx={{
-    '&.MuiInputBase-root.MuiOutlinedInput-root': {
-      // Custom styles here
-      color: '#fff',
-      '&:hover': {
-        color: '#fff',
-      },
-      '&.Mui-focused': {
-        color: '#fff',
-      },
-    },
-    
-    // Apply color directly to the input
-    input: {
-      color: '#fff',
-    }
-  }}
+          InputLabelProps={{ style: { color: '#D4DCE2' } }}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              color: 'white', // This will set the text color of the input field
+              '& fieldset': {
+                borderColor: '#D4DCE2', // default
+              },
+              '&:hover fieldset': {
+                borderColor: '#D4DCE2', // hover
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#D4DCE2', // focused
+              },
+            },
+            // Apply color directly to the dropdown items
+            '& .MuiSelect-select': {
+              color: 'white', // This will set the text color of the dropdown items
+            },
+            // This will change the color of the dropdown icon to white
+            '& .MuiSvgIcon-root': {
+              color: 'white',
+            },
+            // This will change the text color for the menu items (options)
+            '& .MuiMenuItem-root': {
+              color: 'white',
+            },
+          }}
         >
           {insuranceProviders.map((option) => (
             <MenuItem key={option} value={option}>
@@ -228,85 +236,89 @@ function ContactForm(props) {
   }}
 />
 
-        <TextField
-          fullWidth
-          select
-          label="Gender"
-          margin="normal"
-          variant="outlined"
-          name="gender"
-          value={formValues.gender}
-          onChange={handleChange}
-          error={!!formErrors.gender}
-          helperText={formErrors.gender || ' '}
-          InputLabelProps={{ style: { color: '#D4DCE2' } }}
-      
-  // Using the sx prop to apply styles
+<TextField
+  fullWidth
+  select
+  label="Gender"
+  margin="normal"
+  variant="outlined"
+  name="gender"
+  value={formValues.gender}
+  onChange={handleChange}
+  error={!!formErrors.gender}
+  helperText={formErrors.gender || ' '}
+  InputLabelProps={{ style: { color: '#D4DCE2' } }}
   sx={{
     '& .MuiOutlinedInput-root': {
+      color: 'white',
       '& fieldset': {
-        borderColor: '#D4DCE2', // default
+        borderColor: '#D4DCE2',
       },
       '&:hover fieldset': {
-        borderColor: '#D4DCE2', // hover
+        borderColor: '#D4DCE2',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#D4DCE2', // focused
+        borderColor: '#D4DCE2',
       },
     },
-    // Apply color directly to the input
-    input: {
-      color: '#D4DCE2',
-    }
+    '& .MuiSelect-select': {
+      color: 'white',
+    },
+    '& .MuiSvgIcon-root': {
+      color: 'white',
+    },
+    '& .MuiMenuItem-root': {
+      color: 'white',
+    },
   }}
-        >
-          <MenuItem value="Female">Female</MenuItem>
-          <MenuItem value="Male">Male</MenuItem>
-          <MenuItem value="Other">Other</MenuItem>
-          <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
-        </TextField>
-        <TextField
-          fullWidth
-          select
-          label="Blood Type"
-          margin="normal"
-          variant="outlined"
-          name="bloodType"
-          value={formValues.bloodType}
-          onChange={handleChange}
-          error={!!formErrors.bloodType}
-          helperText={formErrors.bloodType || ' '}
-          InputLabelProps={{ style: { color: '#D4DCE2' } }}
-  // Using the sx prop to apply styles
+>
+  <MenuItem value="Female">Female</MenuItem>
+  <MenuItem value="Male">Male</MenuItem>
+  <MenuItem value="Other">Other</MenuItem>
+  <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
+</TextField>
+<TextField
+  fullWidth
+  select
+  label="Blood Type"
+  margin="normal"
+  variant="outlined"
+  name="bloodType"
+  value={formValues.bloodType}
+  onChange={handleChange}
+  error={!!formErrors.bloodType}
+  helperText={formErrors.bloodType || ' '}
+  InputLabelProps={{ style: { color: '#D4DCE2' } }}
   sx={{
     '& .MuiOutlinedInput-root': {
-      '& input' : {
-        color: '#D4DCE2' 
-      },
+      color: 'white',
       '& fieldset': {
-        borderColor: '#D4DCE2', // default
+        borderColor: '#D4DCE2',
       },
       '&:hover fieldset': {
-        borderColor: '#D4DCE2', // hover
+        borderColor: '#D4DCE2',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#D4DCE2', // focused
+        borderColor: '#D4DCE2',
       },
-      
     },
-    // Apply color directly to the input
-    input: {
-      color: '#D4DCE2',
-    }
-    
+    '& .MuiSelect-select': {
+      color: 'white',
+    },
+    '& .MuiSvgIcon-root': {
+      color: 'white',
+    },
+    '& .MuiMenuItem-root': {
+      color: 'white',
+    },
   }}
-        >
-          {bloodTypes.map((type) => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
-          ))}
-        </TextField>
+>
+  {bloodTypes.map((type) => (
+    <MenuItem key={type} value={type}>
+      {type}
+    </MenuItem>
+  ))}
+</TextField>
         <TextField
           fullWidth
           label="Last Four Digits of SSN"
