@@ -35,8 +35,7 @@ patient_info_retriever = AzureCognitiveSearchRetriever(
 )
 qa_chain = RetrievalQA.from_llm(llm=llm, retriever=chat_retriever,verbose=True,
     memory=memory)
-qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=patient_info_retriever,verbose=True,
-    memory=memory)
+qa_chain_patient=RetrievalQA.from_llm(llm=llm, retriever=patient_info_retriever)
 
 chatbot_context = """I am an assistive conversational chatbot here to help Doctor's Treatment Recommendation
 
@@ -105,7 +104,7 @@ def fetch_patient_info():
     name=patient_data.get('name')
     # Assuming the unique_identifier can be used directly to query your vector database
     # Here, you might need to adjust the query format based on how your data is structured
-    query_for_patient_info = f"retrieve and provide the patient records corresponding to this {insuranceNumber}"
+    query_for_patient_info = f"Deep search and provide latest 5 patient records corresponding to the insurance number: {insuranceNumber}. If no records are found for this insurance number, indicate that the patient is not present in the database."
     
     # Use the qa_chain or a similar retrieval mechanism to fetch patient information
     
@@ -119,13 +118,31 @@ def fetch_patient_info():
     # # This step is highly dependent on the format of your patient_info_result
     
    
-    prompt = f"Create a concise medical summary for the following patient data from the start of his first visit to doctor give focussed points for diagnosis, allergies, medications and everything else necessary for doctor to treat the patient and in the end give one summary of the patient:\n{patient_info}"
+    prompt = f"Create a concise medical summary in a paragraph for the following patient data from the start of his first visit to doctor give focussed points for diagnosis, allergies, medications and everything else necessary for doctor to treat the patient\n{patient_info}"
     
     # # Query the OpenAI model to generate a summary
     summary_result =qa_chain_patient.invoke({"query":prompt}) 
+    print(summary_result)
     summary = summary_result.get("result", "Unable to generate summary.")
     print(summary)
     return jsonify({'summary': summary})
+
+@app.route('/fetch_visit_dates', methods=['POST'])
+def fetch_visit_dates():
+    patient_data = request.json
+    insuranceNumber = patient_data.get('insuranceNumber') or patient_data.get('ssn')
+
+    # Craft a query that specifically asks for visit dates associated with the insurance number
+    query_for_visit_dates = f"Retrieve all visit dates in orderly manner for the patient with insurance number: {insuranceNumber}. and return only comma separated dates in ascending order"
+
+    # Invoke the retrieval chain to execute the query
+    visit_dates_result = qa_chain_patient.invoke({"query": query_for_visit_dates})
+    
+    # Extract and process the visit dates from the response
+    visit_dates = visit_dates_result.get("result", "No visit dates found or unable to retrieve visit dates.")
+    
+    # Return the visit dates as part of the response
+    return jsonify({'visit_dates': visit_dates})
 
 
 if __name__ == '__main__':
