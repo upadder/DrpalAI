@@ -59,9 +59,9 @@ function PatientAppointmentHistory(props) {
 
         {/* Content with Padding */}
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-          <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, backgroundColor: '#FFFFFF' }}> {/* White paper background */}
+          <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, backgroundColor: '#121212' }}> {/* White paper background */}
             {/* Summary Data Display */}
-            <Typography component="div" variant="body1" sx={{ whiteSpace: 'pre-wrap', color: '#1E1E1E' }}> {/* Black text for readability */}
+            <Typography component="div" variant="body1" sx={{ whiteSpace: 'pre-wrap', color: '#FFFFFF' }}> {/* Black text for readability */}
               {summaryData}
             </Typography>
           </Paper>
